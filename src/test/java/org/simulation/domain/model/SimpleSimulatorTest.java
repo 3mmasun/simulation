@@ -49,6 +49,17 @@ class SimpleSimulatorTest {
     }
 
     @Test
+    void shouldRunSimulationWithoutCrashing() {
+        Car carA = new Car("A", Coordinate.of(1, 1), new Direction.EAST());
+        Car carB = new Car("B", Coordinate.of(2, 1), new Direction.WEST());
+        simpleSimulator.addCar(carA, List.of(new Command.FORWARD()));
+        simpleSimulator.addCar(carB, List.of(new Command.FORWARD()));
+        simpleSimulator.runSimulation();
+        List<String> cars = simpleSimulator.getResult();
+        assertThat(cars).containsExactlyInAnyOrder("A, (2,1) E", "B, (1,1) W");
+    }
+
+    @Test
     void shouldReturnListOfCars() {
         Car carA = new Car("A", Coordinate.of(1, 1), new Direction.EAST());
         Car carB = new Car("B", Coordinate.of(3, 1), new Direction.WEST());

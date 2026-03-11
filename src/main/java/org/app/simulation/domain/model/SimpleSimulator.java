@@ -39,7 +39,9 @@ public class SimpleSimulator implements Simulator{
                 Command nextCommand = carCommands.get(car).get(step);
                 Coordinate newCoordinate = car.executeCommand(nextCommand, field);
                 field.move(car, currentCoordinate, newCoordinate);
-                List<Car> carsAtLocation = field.getCars(newCoordinate);
+            }
+            for (Car car : cars) {
+                List<Car> carsAtLocation = field.getCars(car.getCoordinate());
                 if (carsAtLocation.size() > 1) {
                     for (Car c : carsAtLocation) {
                         c.crashed();
